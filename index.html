@@ -5,8 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>منصة استخراج بيانات الإكسل</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Enable class-based dark mode for Tailwind CSS
+      tailwind.config = {
+        darkMode: 'class',
+      }
+    </script>
     <!-- SheetJS (xlsx) library for reading Excel files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    
+    <!-- PDF.js library for reading PDF files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script>
+      // Configure the worker for pdf.js, required for it to run in the browser
+      if (typeof pdfjsLib !== 'undefined') {
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+      }
+    </script>
+    
     <!-- jsPDF and plugins for PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
@@ -20,6 +36,26 @@
         font-family: 'Amiri', sans-serif !important;
       }
       @media print {
+        /* Ensure dark mode styles are reverted for printing */
+        html.dark {
+          -webkit-print-color-adjust: exact;
+          color-adjust: exact;
+        }
+        html.dark body {
+           background-color: white !important;
+           color: black !important;
+        }
+        html.dark .printable-content,
+        html.dark .bg-white, 
+        html.dark .bg-slate-800 {
+            background-color: white !important;
+            color: black !important;
+        }
+         html.dark th {
+            background-color: #f2f2f2 !important;
+            color: black !important;
+        }
+
         body {
           background-color: white;
         }
@@ -77,9 +113,9 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/yassinaboadam28-spec/assets/index-CbF3Ban6.js"></script>
+  <script type="module" crossorigin src="/assets/index-C4U3Snx9.js"></script>
 </head>
-  <body class="bg-slate-50">
+  <body class="bg-slate-50 dark:bg-gray-900">
     <div id="root"></div>
   </body>
 </html>
